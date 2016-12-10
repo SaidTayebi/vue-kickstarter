@@ -6,21 +6,20 @@ export default function mutationsCreator(moduleName, keyForData = 'data') {
 
   return {
     [requestAction] (state) {
+      state.success = false
       state.loading = true
     },
     [successAction] (state, mutation) {
-      state[keyForData] = mutation.payload.results
-      state.count = mutation.payload.count
-      state.next = mutation.payload.next
-      state.previous = mutation.payload.previous
+      state[keyForData] = mutation.payload.data
+      state.success = mutation.payload.success
       state.loading = false
-      state.success = true
+      state.error = ''
     },
     [failedAction] (state, mutation) {
-      state.success = false
+      state.success = mutation.error.success
       state.loading = false
-      state.error = mutation.error.detail
-      console.error(`Error while retrieving topics: ${mutation.error.detail}`)
+      state.error = mutation.error.message
+      console.error(`Error in ${moduleName}: ${mutation.error.message}`)
     }
   }
 }

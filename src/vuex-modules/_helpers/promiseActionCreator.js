@@ -8,9 +8,15 @@ export default function promiseActionCreator({commit}, promiseToExecute, moduleN
 
   commit(requestAction(promiseToExecute));
   return promiseToExecute
-    .then(response => response.json())
+    .then(response => {
+      return response.json()
+    })
     .then(data => {
-      commit(successAction(data))
+      if (data.success) {
+        commit(successAction(data))
+      } else {
+        commit(failedAction(data))
+      }
     })
     .catch(response => {
       return response.json().then(error => {

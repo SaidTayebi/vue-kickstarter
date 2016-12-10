@@ -1,4 +1,4 @@
-import {coursesService} from '../courses/services'
+import {coursesService} from './services'
 import promiseActionCreator from '../_helpers/promiseActionCreator'
 import {GET_COURSES} from './constants'
 

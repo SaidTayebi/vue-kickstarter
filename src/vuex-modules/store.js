@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createLogger from 'vuex/dist/logger'
+import signup from './signup'
+import currentUser from './signin'
 import courses from './courses'
+import users from './users'
 
 const plugins = process.env.NODE_ENV !== 'production' ? [createLogger()] : []
 
@@ -13,6 +16,9 @@ export default new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   plugins,
   modules: {
-    courses
+    signup,
+    currentUser,
+    courses,
+    users
   }
 })
